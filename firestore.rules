@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidStatus(status) {
+      return status in ['kept', 'rejected', 'unrated'];
+    }
+
+    // Master Gate: Default Deny all unspecified paths
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // User profile document: users/{userId}
+    match /users/{userId} {
+      allow get: if isOwner(userId);
+      allow create, update: if isOwner(userId);
+      allow delete: if false;
+
+      // Photo documents: users/{userId}/images/{imageId}
+      // Strict even-segment pathing matching system_map.md and .cursorrules
+      match /images/{imageId} {
+        allow get, list: if isOwner(userId);
+
+        allow create: if isOwner(userId)
+          && request.resource.data.userId == userId
+          && isValidStatus(request.resource.data.status);
+
+        allow update: if isOwner(userId)
+          && request.resource.data.userId == userId
+          && isValidStatus(request.resource.data.status);
+
+        allow delete: if isOwner(userId);
+      }
+    }
+  }
+}

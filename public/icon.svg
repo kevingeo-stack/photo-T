@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <rect width="512" height="512" rx="112" fill="#131315" />
+  <rect x="24" y="24" width="464" height="464" rx="92" stroke="#2a2a2c" stroke-width="8" fill="#18181b" />
+  
+  <!-- Left Phone / Card (Emerald #4edea3) -->
+  <g>
+    <rect x="80" y="112" width="144" height="288" rx="28" stroke="#4edea3" stroke-width="20" fill="#131315" />
+    <circle cx="152" cy="208" r="28" fill="#4edea3" />
+    <path d="M96 348 L138 290 L166 322 L198 274 L212 348 Z" fill="#4edea3" opacity="0.85" />
+  </g>
+  
+  <!-- Right Phone / Card (Cyan #4cd7f6) -->
+  <g>
+    <rect x="288" y="112" width="144" height="288" rx="28" stroke="#4cd7f6" stroke-width="20" fill="#131315" />
+    <circle cx="360" cy="208" r="28" fill="#4cd7f6" />
+    <path d="M304 348 L346 290 L374 322 L406 274 L420 348 Z" fill="#4cd7f6" opacity="0.85" />
+  </g>
+  
+  <!-- Center Comparator Node / Cog -->
+  <circle cx="256" cy="256" r="42" fill="#201f22" stroke="#86948a" stroke-width="8" />
+  <circle cx="256" cy="256" r="20" fill="#e5e1e4" />
+  <path d="M256 226 V286 M226 256 H286" stroke="#131315" stroke-width="6" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "User": {
+      "collection": "users",
+      "path": "users/{userId}",
+      "description": "User profile document for authenticated or anonymous session",
+      "fields": {
+        "userId": { "type": "string", "description": "Auth UID of the user" },
+        "createdAt": { "type": "timestamp", "description": "Creation timestamp" },
+        "lastLogin": { "type": "timestamp", "description": "Last activity timestamp" }
+      }
+    },
+    "Image": {
+      "collection": "images",
+      "path": "users/{userId}/images/{imageId}",
+      "description": "Triage photo document with RAW EXIF, status, and AI metrics",
+      "fields": {
+        "id": { "type": "string", "description": "Unique photo identifier" },
+        "name": { "type": "string", "description": "Filename of the photo" },
+        "url": { "type": "string", "description": "Cloud storage or preview URL" },
+        "format": { "type": "string", "description": "File format (ARW, CR3, NEF, DNG, JPG)" },
+        "status": { "type": "string", "description": "Triage status: kept, rejected, unrated" },
+        "size": { "type": "number", "description": "File size in bytes" },
+        "sizeFormatted": { "type": "string", "description": "Formatted file size" },
+        "sharpnessScore": { "type": "number", "description": "Sharpness AI score 0-100" },
+        "starRating": { "type": "number", "description": "Star rating 0-5" },
+        "burstGroupId": { "type": "string", "description": "Optional burst group identifier" },
+        "burstIndex": { "type": "number", "description": "Frame index within burst" },
+        "burstTotal": { "type": "number", "description": "Total frames in burst" },
+        "aiFlag": { "type": "string", "description": "AI highlight tag" },
+        "exif": { "type": "map", "description": "Camera EXIF exposure metadata" },
+        "userId": { "type": "string", "description": "Owner user ID" },
+        "storagePath": { "type": "string", "description": "Cloud Storage path" },
+        "createdAt": { "type": "number", "description": "Timestamp of capture/import" },
+        "updatedAt": { "type": "timestamp", "description": "Timestamp of last status change" }
+      }
+    }
+  }
+}

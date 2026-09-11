@@ -1,0 +1,24 @@
+# .cursorrules
+
+# Coding Standards & Architecture Rules
+
+## 1. Paradigm
+- Strictly follow Object-Oriented Programming (OOP) principles.
+- Use ES6+ Classes, encapsulation, and inheritance where applicable.
+- Separation of Concerns: Separate UI logic, Business Logic, and Data Access Logic.
+
+## 2. PWA & Offline-First
+- App MUST include a valid `manifest.json`.
+- Implement robust Service Workers (`sw.js`) for caching static assets.
+- Use IndexedDB for local caching of image metadata and offline queueing of actions.
+
+## 3. Firebase & Backend
+- EXCLUSIVELY use Firebase (Firestore, Cloud Storage, Auth). DO NOT use n8n, Docker, or external backends.
+- **Firestore Pathing Strict Rule:** All document references MUST have an even number of path segments (e.g., `users/{userId}/images/{imageId}`). NEVER use odd segments for document references to prevent invalid argument errors.
+- Implement strict Firebase Security Rules.
+
+## 4. Version Control
+- Commit changes logically using Git.
+
+## 5. Refactoring
+- When refactoring, RESPECT the existing OOP structure and offline functionality dictated in these `.cursorrules`. Do not break existing class contracts.
