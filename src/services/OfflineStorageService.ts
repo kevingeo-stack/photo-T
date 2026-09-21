@@ -157,18 +157,11 @@ export class OfflineStorageService {
     });
   }
 
-  public async markActionSynced(actionId: string): Promise<void> {
+  public async deleteAction(actionId: string): Promise<void> {
     const store = await this.getStore('syncQueue', 'readwrite');
     return new Promise((resolve, reject) => {
-      const req = store.get(actionId);
-      req.onsuccess = () => {
-        const action = req.result as SyncAction | undefined;
-        if (action) {
-          action.synced = true;
-          store.put(action);
-        }
-        resolve();
-      };
+      const req = store.delete(actionId);
+      req.onsuccess = () => resolve();
       req.onerror = () => reject(req.error);
     });
   }
@@ -189,6 +182,23 @@ export class OfflineStorageService {
       req.onsuccess = () => resolve(req.result?.blob);
       req.onerror = () => reject(req.error);
     });
+  }
+
+  public async deleteBlob(id: string): Promise<void> {
+    const store = await this.getStore('blobs', 'readwrite');
+    return new Promise((resolve, reject) => {
+      const req = store.delete(id);
+      req.onsuccess = () => resolve();
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  public async saveThumbnail(photoId: string, blob: Blob): Promise<void> {
+    return this.saveBlob(`thumb_${photoId}`, blob);
+  }
+
+  public async getThumbnail(photoId: string): Promise<Blob | undefined> {
+    return this.getBlob(`thumb_${photoId}`);
   }
 
   public async clearSyncQueue(): Promise<void> {

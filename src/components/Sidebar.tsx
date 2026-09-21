@@ -19,11 +19,7 @@ export const Sidebar: React.FC = () => {
 
   const handleSelectFolder = (folder: TriageFolder) => {
     photoManager.setFolder(folder);
-    if (folder === 'burst-groups') {
-      controller.setMode('compare');
-    } else {
-      controller.setMode('gallery');
-    }
+    controller.setMode('gallery');
   };
 
   return (
@@ -103,45 +99,8 @@ export const Sidebar: React.FC = () => {
             </span>
           </button>
 
-          {/* Unrated */}
-          <button
-            onClick={() => handleSelectFolder('unrated')}
-            className={`flex items-center justify-between px-space-sm py-2 rounded-lg transition-colors text-left ${
-              activeFolder === 'unrated' && controller.getMode() === 'gallery'
-                ? 'bg-surface-container-high text-on-surface font-semibold'
-                : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
-            }`}
-            type="button"
-          >
-            <div className="flex items-center gap-space-sm">
-              <span className="material-symbols-outlined text-[18px]">help_outline</span>
-              <span className="font-body-md text-body-md">Sin Calificar</span>
-            </div>
-            <span className="font-label-sm text-label-sm bg-surface-container px-1.5 py-0.5 rounded text-on-surface-variant">
-              {counts.unrated}
-            </span>
-          </button>
 
-          {/* Burst Groups */}
-          <button
-            onClick={() => handleSelectFolder('burst-groups')}
-            className={`flex items-center justify-between px-space-sm py-2 rounded-lg transition-colors text-left ${
-              activeFolder === 'burst-groups'
-                ? 'bg-surface-container-high text-secondary font-semibold'
-                : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
-            }`}
-            type="button"
-          >
-            <div className="flex items-center gap-space-sm">
-              <span className="material-symbols-outlined text-[18px] text-secondary">
-                auto_awesome_motion
-              </span>
-              <span className="font-body-md text-body-md">Grupos de Ráfagas</span>
-            </div>
-            <span className="font-label-sm text-label-sm bg-surface-container px-1.5 py-0.5 rounded text-secondary font-semibold">
-              {counts.bursts}
-            </span>
-          </button>
+
         </nav>
 
         <div className="h-px bg-outline-variant/40 my-1"></div>
@@ -204,7 +163,7 @@ export const Sidebar: React.FC = () => {
         </div>
 
         <button
-          onClick={() => controller.toggleExportModal()}
+          onClick={() => controller.openExportView()}
           className="flex items-center justify-center gap-space-xs w-full py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-lg text-label-lg transition-all shadow-[0_2px_8px_rgba(78,222,163,0.2)] hover:shadow-[0_4px_12px_rgba(78,222,163,0.3)]"
           type="button"
         >

@@ -11,15 +11,17 @@ import { FirebaseService } from '../services/FirebaseService';
 export class AppController {
   private static instance: AppController;
   private currentMode: NavigationMode = 'gallery';
+  private preRoundOrigin: NavigationMode = 'gallery';
+  private preRoundSelection: string[] = [];
   private sessionInfo: SessionInfo = {
     id: 'session-2024-iceland',
     title: 'Session: 2024 Iceland Expedition',
     date: '2024-09-12',
-    usedStorageGB: 64.2,
-    totalStorageGB: 100.0
+    usedStorageGB: 0,
+    totalStorageGB: null
   };
   private showShortcutsModal: boolean = false;
-  private showExportModal: boolean = false;
+  private finalSelectionIds: Set<string> = new Set();
   private listeners: Array<() => void> = [];
 
   private photoManager = PhotoManager.getInstance();
@@ -29,6 +31,40 @@ export class AppController {
 
   private constructor() {
     this.initKeyboardShortcuts();
+    this.updateStorageInfo();
+    
+    // Escuchar a ComparisonManager para navegar reactivamente y romper el ciclo
+    this.comparisonManager.subscribe(() => {
+      const session = this.comparisonManager.getSession();
+      
+      // Si la sesión termina y estamos en modo compare, hay dos caminos:
+      if (this.currentMode === 'compare' && !session.isActive) {
+        if (session.winners.length > 0) {
+          // Ronda finalizada normalmente
+          this.setMode('finalists');
+        } else {
+          // Torneo fue cancelado manualmente (winners está vacío)
+          this.setMode('gallery');
+        }
+      }
+    });
+
+    // Cleanup selections if photos are deleted
+    this.photoManager.subscribe(() => {
+      const allIds = new Set(this.photoManager.getPhotos().map(p => p.id));
+      
+      const oldPreLen = this.preRoundSelection.length;
+      this.preRoundSelection = this.preRoundSelection.filter(id => allIds.has(id));
+      
+      const oldFinalLen = this.finalSelectionIds.size;
+      for (const id of this.finalSelectionIds) {
+        if (!allIds.has(id)) this.finalSelectionIds.delete(id);
+      }
+      
+      if (oldPreLen !== this.preRoundSelection.length || oldFinalLen !== this.finalSelectionIds.size) {
+        this.notify();
+      }
+    });
   }
 
   public static getInstance(): AppController {
@@ -36,6 +72,21 @@ export class AppController {
       AppController.instance = new AppController();
     }
     return AppController.instance;
+  }
+
+  public async updateStorageInfo(): Promise<void> {
+    try {
+      if (typeof navigator !== 'undefined' && navigator.storage && navigator.storage.estimate) {
+        const estimate = await navigator.storage.estimate();
+        const used = estimate.usage || 0;
+        const total = estimate.quota || 0;
+        this.sessionInfo.usedStorageGB = Number((used / (1024 * 1024 * 1024)).toFixed(2));
+        this.sessionInfo.totalStorageGB = total > 0 ? Number((total / (1024 * 1024 * 1024)).toFixed(2)) : null;
+      }
+    } catch (e) {
+      console.warn('[AppController] Could not estimate storage:', e);
+    }
+    this.notify();
   }
 
   private initKeyboardShortcuts(): void {
@@ -72,41 +123,31 @@ export class AppController {
       // [C] Switch to Compare 2-Up
       if (e.key.toLowerCase() === 'c') {
         e.preventDefault();
-        this.setMode(this.currentMode === 'compare' ? 'gallery' : 'compare');
+        if (this.currentMode === 'compare') {
+          this.setMode('gallery');
+        } else {
+          this.startComparisonWithSelection();
+        }
         return;
       }
 
       // Compare mode specific shortcuts
       if (this.currentMode === 'compare') {
-        if (e.key === '1' || e.key.toLowerCase() === 'k') {
+        const session = this.comparisonManager.getSession();
+        
+        if (e.key === '1' || e.key === 'ArrowLeft') {
           e.preventDefault();
-          this.comparisonManager.keepA();
+          if (session.currentPair) this.comparisonManager.chooseWinner(session.currentPair[0]);
           return;
         }
-        if (e.key === '2' || e.key.toLowerCase() === 'l') {
+        if (e.key === '2' || e.key === 'ArrowRight') {
           e.preventDefault();
-          this.comparisonManager.keepB();
-          return;
-        }
-        if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          this.comparisonManager.advanceBurstFrame(-1);
-          return;
-        }
-        if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          this.comparisonManager.advanceBurstFrame(1);
+          if (session.currentPair) this.comparisonManager.chooseWinner(session.currentPair[1]);
           return;
         }
         if (e.key.toLowerCase() === 'z') {
           e.preventDefault();
-          const current = this.comparisonManager.getState().zoomLevel;
-          this.comparisonManager.setZoomLevel(current === '100%' ? '200%' : current === '200%' ? 'fit' : '100%');
-          return;
-        }
-        if (e.key.toLowerCase() === 'x') {
-          e.preventDefault();
-          this.comparisonManager.rejectB();
+          this.comparisonManager.undo();
           return;
         }
       } else {
@@ -123,6 +164,41 @@ export class AppController {
         }
       }
     });
+  }
+
+  public startComparisonWithSelection(): void {
+    const selectedIds = Array.from(this.photoManager.getSelectedIds());
+    if (selectedIds.length < 2) {
+      return;
+    }
+    this.openSelectionView(selectedIds);
+  }
+
+  public openSelectionView(selectedIds: string[]): void {
+    this.preRoundOrigin = this.currentMode;
+    this.preRoundSelection = [...selectedIds];
+    this.setMode('pre-round');
+  }
+
+  public cancelSelectionView(): void {
+    this.setMode(this.preRoundOrigin);
+  }
+
+  public startComparisonFromSelection(selectedIds: string[]): void {
+    if (selectedIds.length < 2) return;
+    const success = this.comparisonManager.startSession(selectedIds);
+    if (success) {
+      this.setMode('compare');
+    }
+  }
+
+  public returnToSelectionView(): void {
+    this.comparisonManager.cancelSession();
+    this.setMode('pre-round');
+  }
+
+  public getPreRoundSelection(): string[] {
+    return [...this.preRoundSelection];
   }
 
   public getMode(): NavigationMode {
@@ -147,12 +223,30 @@ export class AppController {
     this.notify();
   }
 
-  public isExportModalOpen(): boolean {
-    return this.showExportModal;
+  public openExportView(): void {
+    if (this.finalSelectionIds.size > 0) {
+      this.setMode('export');
+    } else {
+      alert('Selecciona al menos una foto para exportar.');
+    }
   }
 
-  public toggleExportModal(): void {
-    this.showExportModal = !this.showExportModal;
+  public getFinalSelection(): string[] {
+    return Array.from(this.finalSelectionIds);
+  }
+
+  public setFinalSelection(ids: string[]): void {
+    this.finalSelectionIds = new Set(ids);
+    this.notify();
+  }
+
+  public openEditorWithSelection(ids: string[]): void {
+    this.setFinalSelection(ids);
+    this.setMode('editor');
+  }
+
+  public clearFinalSelection(): void {
+    this.finalSelectionIds.clear();
     this.notify();
   }
 

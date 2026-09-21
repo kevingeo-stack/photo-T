@@ -1,4 +1,4 @@
-import { Photo, BurstGroup } from './types';
+import { Photo } from './types';
 
 export const INITIAL_PHOTOS: Photo[] = [
   {
@@ -11,9 +11,6 @@ export const INITIAL_PHOTOS: Photo[] = [
     status: 'kept',
     sharpnessScore: 98.4,
     starRating: 4,
-    burstGroupId: 'burst-04',
-    burstIndex: 2,
-    burstTotal: 8,
     aiFlag: '98.4',
     exif: {
       shutter: '1/1000s',
@@ -59,7 +56,7 @@ export const INITIAL_PHOTOS: Photo[] = [
     size: 55364812,
     sizeFormatted: '52.8 MB',
     format: 'NEF',
-    status: 'unrated',
+    status: 'kept',
     sharpnessScore: 97.8,
     starRating: 0,
     aiFlag: 'Eye-AF Lock',
@@ -107,7 +104,7 @@ export const INITIAL_PHOTOS: Photo[] = [
     size: 15309226,
     sizeFormatted: '14.6 MB',
     format: 'JPG',
-    status: 'unrated',
+    status: 'kept',
     sharpnessScore: 94.1,
     starRating: 0,
     aiFlag: '94.1',
@@ -179,13 +176,10 @@ export const INITIAL_PHOTOS: Photo[] = [
     size: 51275366,
     sizeFormatted: '48.9 MB',
     format: 'CR3',
-    status: 'unrated',
+    status: 'kept',
     sharpnessScore: 91.0,
     starRating: 0,
-    burstGroupId: 'burst-02',
-    burstIndex: 3,
-    burstTotal: 8,
-    aiFlag: 'Burst (3 of 8)',
+
     exif: {
       shutter: '1/500s',
       aperture: 'f/5.6',
@@ -199,212 +193,4 @@ export const INITIAL_PHOTOS: Photo[] = [
     },
     createdAt: Date.now() - 3600000 * 17
   },
-  // Burst Sequence for Compare 2-Up (Dynjandi Waterfall Burst Set #04)
-  {
-    id: 'DSC08491',
-    name: 'DSC08491.ARW',
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAn8jBaR4y_4hGDH_MztE4y2Ics52fcCwWXBoKt01LQybmkNhCfYe3FiMtoPE1twkC5qnftHpniEVe_oOUN8o9RCwy3dvGqNQ5WvcTuQmnhBZWovldlnNtyMu9HhuAvNfb5bzCqAe5n3UxC3RhRqvbIu7F8yJ-x1N2FP83oYcg-d_EH2tqloDzJ52t4_uEelp0TP1IDMQnGq-6RcCRxWHgcll2-ws0DPLNpBZrGdQGhlkscq-QFHuLO',
-    size: 61200000,
-    sizeFormatted: '61.2 MB',
-    format: 'ARW',
-    status: 'rejected',
-    sharpnessScore: 78.0,
-    starRating: 0,
-    burstGroupId: 'burst-04',
-    burstIndex: 1,
-    burstTotal: 8,
-    aiFlag: 'Spray Blur',
-    exif: {
-      shutter: '1/1250s',
-      aperture: 'f/4.0',
-      iso: 100,
-      focalLength: '35mm',
-      lens: 'FE 24-70mm GM II @ 35mm',
-      camera: 'Sony A1',
-      dimensions: '9504 × 6336',
-      megapixels: '61 MP',
-      evShift: '0.0 EV'
-    },
-    createdAt: Date.now() - 3600000 * 24 + 180
-  },
-  {
-    id: 'DSC08493',
-    name: 'DSC08493.ARW',
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDG-K4doNtj8VgvHMVYm3gfcT3SThidWDAT3OvUd7rRwyYh6w6Sytsj75wxZcyLbpRj8elcfnTQTUw4ejT5yKhz5hiN0g5YHKqZkHtGv1rwR_VePA4-RCkoBYnZxNwEiOnEVASW95BG24pDvuS3PG5txLU9PqtLYksL02kOOWJTa10WxhhT7G_y_e9mpPO-in7CtxlDkWTyzmncDlbgqeySduqBWoW7nscpz8B_qRM32XdRH5uTl4Mo',
-    size: 61500000,
-    sizeFormatted: '61.5 MB',
-    format: 'ARW',
-    status: 'kept',
-    sharpnessScore: 99.8,
-    starRating: 5,
-    burstGroupId: 'burst-04',
-    burstIndex: 3,
-    burstTotal: 8,
-    aiFlag: '+0.3 EV Shift · Water Peak',
-    exif: {
-      shutter: '1/1250s',
-      aperture: 'f/4.0',
-      iso: 100,
-      focalLength: '35mm',
-      lens: 'FE 24-70mm GM II @ 35mm',
-      camera: 'Sony A1',
-      dimensions: '9504 × 6336',
-      megapixels: '61 MP',
-      evShift: '+0.33 EV'
-    },
-    createdAt: Date.now() - 3600000 * 24 + 360
-  },
-  {
-    id: 'DSC08494',
-    name: 'DSC08494.ARW',
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDEPqqBWX-mSUYP-c3foAAp-gebZwML-cUc9vOHKGfSKbk6XQdfXWUztB56Iw4La95T3x5Yg7uEMmRNoY1R-ZvKPb50IYC_1J_6loAbktg1H1lBF14M9L-qGg6r90ajsJRgaUb_RloUazbAv_3IRfIzny7UmwyUzlrVNSaJkRllbDNUg7XO9B6ZLAdqV1cyehUDIdfDkpEqFW89nkDkBhU_P_9ovxhzDpT1wVXG2BJs7phl4z9ehVxN',
-    size: 61300000,
-    sizeFormatted: '61.3 MB',
-    format: 'ARW',
-    status: 'unrated',
-    sharpnessScore: 91.2,
-    starRating: 0,
-    burstGroupId: 'burst-04',
-    burstIndex: 4,
-    burstTotal: 8,
-    exif: {
-      shutter: '1/1250s',
-      aperture: 'f/4.0',
-      iso: 100,
-      focalLength: '35mm',
-      lens: 'FE 24-70mm GM II @ 35mm',
-      camera: 'Sony A1',
-      dimensions: '9504 × 6336',
-      megapixels: '61 MP',
-      evShift: '0.0 EV'
-    },
-    createdAt: Date.now() - 3600000 * 24 + 540
-  },
-  {
-    id: 'DSC08495',
-    name: 'DSC08495.ARW',
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAieXf3fNYyfAvbc32MCRhVZQwioYLio2YsiY9Xq7VchbYRvLFI9kCmqf3ofxyoTXsiuotE84KMhR0McWvmaKLBdelkFuOvAjdv-c4MA3Y6OdR0rW8ZhYvMI7YLsdEiEz2slWFznuaLFJKZi0rKMw2ZpK7z5rMmrkidzDk6_OIK8mT7jzOT8PI9eKj4Hw-P9YniKfIWz8guBDymNBMnnVJDG19HAnPBoT2c1m4PvtqRLya2MKYI4-GX',
-    size: 61800000,
-    sizeFormatted: '61.8 MB',
-    format: 'ARW',
-    status: 'kept',
-    sharpnessScore: 96.5,
-    starRating: 4,
-    burstGroupId: 'burst-04',
-    burstIndex: 5,
-    burstTotal: 8,
-    aiFlag: 'Rainbow Peak',
-    exif: {
-      shutter: '1/1250s',
-      aperture: 'f/4.0',
-      iso: 100,
-      focalLength: '35mm',
-      lens: 'FE 24-70mm GM II @ 35mm',
-      camera: 'Sony A1',
-      dimensions: '9504 × 6336',
-      megapixels: '61 MP',
-      evShift: '0.0 EV'
-    },
-    createdAt: Date.now() - 3600000 * 24 + 720
-  },
-  {
-    id: 'DSC08496',
-    name: 'DSC08496.ARW',
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBJOnTziygp42YPaFOwTHjIXhnXd7jKfKCg1oA1I4AgGw_kXeIpmDoFB90Aj8GxoIQ1e1xUmT-csOQY85YMCJDWSDhW_uyCubqWW6QoqNJe0vX94SDKtWuQqUeyqGsg9rjoYfDGxnjOnFPKYU5bJR8_xSf82d5PgijFVJjqbH7E12biO4dL1BJuL2hmV2el6no_v5Wyxxi0auQmYjtmq4Xq7W1SBN66fwhcJ538G5AxZSxltPJ48NL_',
-    size: 61100000,
-    sizeFormatted: '61.1 MB',
-    format: 'ARW',
-    status: 'unrated',
-    sharpnessScore: 89.4,
-    starRating: 0,
-    burstGroupId: 'burst-04',
-    burstIndex: 6,
-    burstTotal: 8,
-    exif: {
-      shutter: '1/1250s',
-      aperture: 'f/4.0',
-      iso: 100,
-      focalLength: '35mm',
-      lens: 'FE 24-70mm GM II @ 35mm',
-      camera: 'Sony A1',
-      dimensions: '9504 × 6336',
-      megapixels: '61 MP',
-      evShift: '0.0 EV'
-    },
-    createdAt: Date.now() - 3600000 * 24 + 900
-  },
-  {
-    id: 'DSC08497',
-    name: 'DSC08497.ARW',
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD1poCOieWKtg6n_Xr_mHFV7pGMu9_R2DJGzzyGwR6-tOp3JQkyaVs6o7seRZWnsRnuJpPaHjYuFc89sWnAoUSIFAZ3IZXufvyE7eFtrIuUTljEZzwmmZjtaUtjlLz2MsrEiSIbsqsamShBDXQY72z3IKxdkeAUMdrRwx9qSFoLHJme4l_2GPAwtPZPxJx_WVYk9AcR2afbUuaZjCBDnBwsfcOJryKI4UzntNim6xK7xy9OojGa3Lh6',
-    size: 61400000,
-    sizeFormatted: '61.4 MB',
-    format: 'ARW',
-    status: 'unrated',
-    sharpnessScore: 92.1,
-    starRating: 0,
-    burstGroupId: 'burst-04',
-    burstIndex: 7,
-    burstTotal: 8,
-    exif: {
-      shutter: '1/1250s',
-      aperture: 'f/4.0',
-      iso: 100,
-      focalLength: '35mm',
-      lens: 'FE 24-70mm GM II @ 35mm',
-      camera: 'Sony A1',
-      dimensions: '9504 × 6336',
-      megapixels: '61 MP',
-      evShift: '0.0 EV'
-    },
-    createdAt: Date.now() - 3600000 * 24 + 1080
-  },
-  {
-    id: 'DSC08498',
-    name: 'DSC08498.ARW',
-    url: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC5QjKdSAg6hnPa0sP85HCi6e2RdsyUE2F3ysQFfxwLz7Bg5Jh46w0OiRIBN3tqSBi9YxbP54A7n3U7w7c7SxK5fA3ccyECV2Yi9Syi6-KkXQOcixalgvBTTCIJOk1qt_jB21iABapvdR6jcuGdDs2LY7lkUycPYIE3_Fi-5fy78swfhXrIbbf2z1BKI5t2lPRKdRMI8W1lSXvfXL4Xhz9rkz__oqB0eSf7g15B5Sp3rZr_qRuxQBpM',
-    size: 61000000,
-    sizeFormatted: '61.0 MB',
-    format: 'ARW',
-    status: 'rejected',
-    sharpnessScore: 62.4,
-    starRating: 0,
-    burstGroupId: 'burst-04',
-    burstIndex: 8,
-    burstTotal: 8,
-    aiFlag: 'Motion Blur',
-    exif: {
-      shutter: '1/1250s',
-      aperture: 'f/4.0',
-      iso: 100,
-      focalLength: '35mm',
-      lens: 'FE 24-70mm GM II @ 35mm',
-      camera: 'Sony A1',
-      dimensions: '9504 × 6336',
-      megapixels: '61 MP',
-      evShift: '0.0 EV'
-    },
-    createdAt: Date.now() - 3600000 * 24 + 1260
-  }
-];
-
-export const INITIAL_BURST_GROUPS: BurstGroup[] = [
-  {
-    id: 'burst-04',
-    name: 'Burst Group #04',
-    count: 8,
-    interval: '0.18s interval',
-    basePhotoId: 'DSC08492',
-    activePhotoId: 'DSC08493',
-    photoIds: [
-      'DSC08491',
-      'DSC08492',
-      'DSC08493',
-      'DSC08494',
-      'DSC08495',
-      'DSC08496',
-      'DSC08497',
-      'DSC08498'
-    ]
-  }
 ];

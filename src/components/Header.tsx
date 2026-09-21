@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
               photo_library
             </span>
             <span className="font-label-md text-label-md text-on-surface">
-              {session.titulo}
+              {session.title}
             </span>
             <span className="material-symbols-outlined text-[14px] text-on-surface-variant">
               unfold_more
@@ -92,19 +92,33 @@ export const Header: React.FC = () => {
         {/* Right: Storage, PWA, Shortcuts, Avatar */}
         <div className="flex items-center gap-space-md">
           {/* Storage Meter */}
-          <div className="hidden lg:flex items-center gap-space-xs bg-surface-container px-space-sm py-1 rounded-lg">
-            <span className="material-symbols-outlined text-[15px] text-on-surface-variant">
-              hard_drive
-            </span>
-            <div className="w-16 bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-              <div
-                className="bg-primary h-full rounded-full transition-all"
-                style={{ width: `${(session.usedStorageGB / session.totalStorageGB) * 100}%` }}
-              ></div>
+          <div className="hidden lg:flex flex-col gap-1 bg-surface-container px-3 py-1.5 rounded-lg min-w-[140px]">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-[14px] text-on-surface-variant">
+                  hard_drive
+                </span>
+                <span className="text-xs font-medium text-on-surface-variant">Almacenamiento</span>
+              </div>
+              <span className="text-[10px] text-on-surface-variant font-medium">
+                {session.usedStorageGB} GB
+              </span>
             </div>
-            <span className="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">
-              {session.usedStorageGB} / {session.totalStorageGB} GB
-            </span>
+            
+            {session.totalStorageGB ? (
+              <div className="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden" title={`${session.usedStorageGB} GB usados de ${session.totalStorageGB} GB permitidos por el dispositivo`}>
+                <div
+                  className={`h-full rounded-full transition-all ${
+                    (session.usedStorageGB / session.totalStorageGB) > 0.9 ? 'bg-red-500' : 'bg-primary'
+                  }`}
+                  style={{ width: `${Math.min(100, (session.usedStorageGB / session.totalStorageGB) * 100)}%` }}
+                ></div>
+              </div>
+            ) : (
+              <div className="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden" title={`${session.usedStorageGB} GB usados. Límite gestionado por el dispositivo.`}>
+                <div className="bg-primary/50 h-full w-1/3 rounded-full"></div>
+              </div>
+            )}
           </div>
 
           <PWAInstallButton />

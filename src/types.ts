@@ -2,7 +2,7 @@
  * PhotoTriage Types and Interfaces
  */
 
-export type PhotoStatus = 'kept' | 'rejected' | 'unrated';
+export type PhotoStatus = 'kept' | 'rejected';
 
 export type PhotoFormat = 'ARW' | 'CR3' | 'NEF' | 'DNG' | 'JPG' | 'PNG' | 'TIFF';
 
@@ -18,6 +18,18 @@ export interface ExifData {
   evShift?: string;      // e.g. "0.0 EV", "+0.33 EV", "+2.8 EV Over"
 }
 
+export interface PhotoEditState {
+  brightness: number;
+  contrast: number;
+  saturation: number;
+  crop?: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  };
+}
+
 export interface Photo {
   id: string;
   name: string;
@@ -29,9 +41,6 @@ export interface Photo {
   status: PhotoStatus;
   sharpnessScore: number;    // e.g. 98.4
   starRating: number;        // 0 to 5
-  burstGroupId?: string;
-  burstIndex?: number;
-  burstTotal?: number;
   aiFlag?: string;           // e.g. "Eye-AF Lock", "Motion Blur", "+2.8 EV Over", "5 Stars"
   exif: ExifData;
   createdAt: number;
@@ -39,22 +48,12 @@ export interface Photo {
   userId?: string;
   storagePath?: string;
   isLocalOnly?: boolean;
+  editState?: PhotoEditState | null;
 }
 
-export interface BurstGroup {
-  id: string;
-  name: string;
-  count: number;
-  interval: string;
-  basePhotoId: string;
-  activePhotoId: string;
-  photoIds: string[];
-}
 
-export type TriageFolder = 'all' | 'flagged' | 'rejected' | 'unrated' | 'burst-groups';
-
-export type NavigationMode = 'gallery' | 'compare' | 'history-trash' | 'editor';
-
+export type TriageFolder = 'all' | 'flagged' | 'rejected';
+export type NavigationMode = 'gallery' | 'pre-round' | 'compare' | 'history-trash' | 'editor' | 'finalists' | 'export';
 export type SortMode = 'capture-desc' | 'capture-asc' | 'sharpness' | 'iso' | 'filesize';
 
 export interface IngestionProgress {
@@ -76,14 +75,25 @@ export interface SyncAction {
   synced: boolean;
 }
 
-export interface ComparisonState {
-  candidateAId: string;
-  candidateBId: string;
-  zoomLevel: 'fit' | '100%' | '200%';
-  showHistogram: boolean;
-  showPeaking: boolean;
-  splitCurtain: boolean;
-  activeBurstGroupId: string;
+export interface ComparisonDecision {
+  leftId: string;
+  rightId: string;
+  winnerId: string;
+  loserId: string;
+  previousPendingPairs: [string, string][];
+  previousWinners: string[];
+  previousEliminatedIds: string[];
+}
+
+export interface ComparisonSession {
+  isActive: boolean;
+  roundNumber: number;
+  initialIds: string[];
+  pendingPairs: [string, string][];
+  currentPair: [string, string] | null;
+  winners: string[];
+  eliminatedIds: string[];
+  history: ComparisonDecision[];
 }
 
 export interface SessionInfo {
@@ -91,5 +101,5 @@ export interface SessionInfo {
   title: string;
   date: string;
   usedStorageGB: number;
-  totalStorageGB: number;
+  totalStorageGB: number | null;
 }

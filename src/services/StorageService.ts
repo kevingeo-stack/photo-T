@@ -45,6 +45,7 @@ export class StorageService {
    */
   public async uploadPhoto(
     userId: string,
+    photoId: string,
     file: File | Blob,
     filename: string,
     onProgress?: (progressPercent: number) => void
@@ -69,12 +70,12 @@ export class StorageService {
             (error) => {
               console.warn('[StorageService] Remote upload failed, caching locally in IndexedDB:', error);
               // Fallback to local offline cache
-              this.cacheLocally(cleanFilename, file, storagePath).then(resolve).catch(reject);
+              this.cacheLocally(photoId, file, storagePath, onProgress).then(resolve).catch(reject);
             },
             async () => {
               const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
-              // Also cache blob locally for fast offline loupe zoom
-              await this.offlineStorage.saveBlob(cleanFilename, file);
+              // Also cache blob locally for fast offline loupe zoom using photoId
+              await this.offlineStorage.saveBlob(photoId, file);
               resolve({
                 url: downloadUrl,
                 storagePath,
@@ -89,23 +90,21 @@ export class StorageService {
     }
 
     // Offline or Firebase Storage unconfigured fallback
-    return this.cacheLocally(cleanFilename, file, storagePath, onProgress);
+    return this.cacheLocally(photoId, file, storagePath, onProgress);
   }
 
   private async cacheLocally(
-    filenameId: string,
+    photoId: string,
     file: File | Blob,
     storagePath: string,
     onProgress?: (progressPercent: number) => void
   ): Promise<{ url: string; storagePath: string; isLocalBlob: boolean }> {
     if (onProgress) {
-      // simulate instant progress
       onProgress(100);
     }
-    await this.offlineStorage.saveBlob(filenameId, file);
-    const objectUrl = URL.createObjectURL(file);
+    await this.offlineStorage.saveBlob(photoId, file);
     return {
-      url: objectUrl,
+      url: '', // Object URL should not be persisted. UI will generate it dynamically.
       storagePath,
       isLocalBlob: true
     };

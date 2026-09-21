@@ -19,7 +19,7 @@ export const HistoryTrashUI: React.FC = () => {
   const keptPhotos = allPhotos.filter((p) => p.status === 'kept');
 
   const handleRestore = async (photoId: string) => {
-    await photoManager.setStatus(photoId, 'unrated');
+    await photoManager.setStatus(photoId, 'kept');
   };
 
   const handleDeletePermanent = async (photoId: string) => {

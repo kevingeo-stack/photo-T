@@ -1,26 +1,19 @@
-import { Photo, BurstGroup, ComparisonState } from '../types';
-import { INITIAL_BURST_GROUPS } from '../mockData';
-import { PhotoManager } from './PhotoManager';
+import { Photo, ComparisonSession, ComparisonDecision } from '../types';
 
-/**
- * ComparisonManager - OOP class managing 2-Up split triage comparison,
- * synchronized loupe zoom, edge peaking inspection, histogram analysis,
- * and burst sequence filmstrip navigation.
- */
 export class ComparisonManager {
   private static instance: ComparisonManager;
-  private state: ComparisonState = {
-    candidateAId: 'DSC08492',
-    candidateBId: 'DSC08493',
-    zoomLevel: '100%',
-    showHistogram: true,
-    showPeaking: true,
-    splitCurtain: false,
-    activeBurstGroupId: 'burst-04'
+  
+  private session: ComparisonSession = {
+    isActive: false,
+    roundNumber: 1,
+    initialIds: [],
+    pendingPairs: [],
+    currentPair: null,
+    winners: [],
+    eliminatedIds: [],
+    history: []
   };
 
-  private burstGroups: BurstGroup[] = [...INITIAL_BURST_GROUPS];
-  private photoManager = PhotoManager.getInstance();
   private listeners: Array<() => void> = [];
 
   private constructor() {}
@@ -32,116 +25,133 @@ export class ComparisonManager {
     return ComparisonManager.instance;
   }
 
-  public getState(): ComparisonState {
-    return { ...this.state };
+  public getSession(): ComparisonSession {
+    return { ...this.session };
   }
 
-  public getCandidateA(): Photo | undefined {
-    return this.photoManager.getPhotos().find((p) => p.id === this.state.candidateAId);
+  public getCurrentPair(): [string, string] | null {
+    return this.session.currentPair;
   }
 
-  public getCandidateB(): Photo | undefined {
-    return this.photoManager.getPhotos().find((p) => p.id === this.state.candidateBId);
-  }
-
-  public getActiveBurstGroup(): BurstGroup | undefined {
-    return this.burstGroups.find((g) => g.id === this.state.activeBurstGroupId);
-  }
-
-  public getBurstPhotos(): Photo[] {
-    const group = this.getActiveBurstGroup();
-    if (!group) return [];
-    const all = this.photoManager.getPhotos();
-    return group.photoIds.map((id) => all.find((p) => p.id === id)).filter((p): p is Photo => !!p);
-  }
-
-  public setCandidates(idA: string, idB: string): void {
-    this.state.candidateAId = idA;
-    this.state.candidateBId = idB;
-    this.notify();
-  }
-
-  public setCandidateB(idB: string): void {
-    this.state.candidateBId = idB;
-    this.notify();
-  }
-
-  public setZoomLevel(level: 'fit' | '100%' | '200%'): void {
-    this.state.zoomLevel = level;
-    this.notify();
-  }
-
-  public toggleHistogram(): void {
-    this.state.showHistogram = !this.state.showHistogram;
-    this.notify();
-  }
-
-  public togglePeaking(): void {
-    this.state.showPeaking = !this.state.showPeaking;
-    this.notify();
-  }
-
-  public toggleSplitCurtain(): void {
-    this.state.splitCurtain = !this.state.splitCurtain;
-    this.notify();
+  public getWinners(): string[] {
+    return [...this.session.winners];
   }
 
   /**
-   * Keep Candidate A (Key: 1 or Button): Marks A as kept
+   * Starts a new Tournament Round
    */
-  public async keepA(): Promise<void> {
-    if (this.state.candidateAId) {
-      await this.photoManager.setStatus(this.state.candidateAId, 'kept');
+  public startSession(ids: string[]): boolean {
+    const sessionIds = [...new Set(ids)]; // Deduplicate input IDs
+    
+    if (sessionIds.length < 2) {
+      return false; // Need at least 2 photos to start a round
     }
-  }
 
-  /**
-   * Reject Candidate A: Marks A as rejected
-   */
-  public async rejectA(): Promise<void> {
-    if (this.state.candidateAId) {
-      await this.photoManager.setStatus(this.state.candidateAId, 'rejected');
-    }
-  }
+    const pendingPairs: [string, string][] = [];
+    const winners: string[] = [];
 
-  /**
-   * Keep Candidate B (Promoted Winner, Key: 2 or Button):
-   * Marks B as kept, and optionally shifts B to become the new Base (Slot A) for subsequent comparisons.
-   */
-  public async keepB(promoteToBase = false): Promise<void> {
-    if (this.state.candidateBId) {
-      await this.photoManager.setStatus(this.state.candidateBId, 'kept');
-      if (promoteToBase) {
-        this.state.candidateAId = this.state.candidateBId;
-        this.advanceBurstFrame(1);
+    // Create mutually exclusive pairs
+    for (let i = 0; i < sessionIds.length; i += 2) {
+      if (i + 1 < sessionIds.length) {
+        pendingPairs.push([sessionIds[i], sessionIds[i + 1]]);
+      } else {
+        // Odd one out, gets a bye
+        winners.push(sessionIds[i]);
       }
     }
+
+    const currentPair = pendingPairs.length > 0 ? pendingPairs.shift()! : null;
+    
+    this.session = {
+      isActive: true,
+      roundNumber: this.session.isActive ? this.session.roundNumber : this.session.roundNumber + 1,
+      initialIds: sessionIds,
+      pendingPairs,
+      currentPair,
+      winners,
+      eliminatedIds: [],
+      history: []
+    };
+
+    this.notify();
+    return true;
   }
 
   /**
-   * Reject Candidate B: Marks B as rejected and advances to next burst frame
+   * Choose the winner of the current matchup
    */
-  public async rejectB(): Promise<void> {
-    if (this.state.candidateBId) {
-      await this.photoManager.setStatus(this.state.candidateBId, 'rejected');
-      this.advanceBurstFrame(1);
+  public chooseWinner(winnerId: string): void {
+    if (!this.session.isActive || !this.session.currentPair) return;
+
+    const [leftId, rightId] = this.session.currentPair;
+    if (winnerId !== leftId && winnerId !== rightId) {
+      return; // Invalid winnerId
     }
+
+    const loserId = winnerId === leftId ? rightId : leftId;
+
+    // Save exact previous state for deterministic undo
+    const decision: ComparisonDecision = {
+      leftId,
+      rightId,
+      winnerId,
+      loserId,
+      previousPendingPairs: this.session.pendingPairs.map(pair => [...pair] as [string, string]),
+      previousWinners: [...this.session.winners],
+      previousEliminatedIds: [...this.session.eliminatedIds]
+    };
+
+    this.session.history.push(decision);
+    
+    // Apply consequences
+    this.session.winners.push(winnerId);
+    this.session.eliminatedIds.push(loserId);
+
+    // Fetch next pair
+    if (this.session.pendingPairs.length > 0) {
+      this.session.currentPair = this.session.pendingPairs.shift()!;
+    } else {
+      // No more pairs, round is over
+      this.session.currentPair = null;
+      this.session.isActive = false;
+    }
+
+    this.notify();
   }
 
   /**
-   * Step through burst frames in Slot B
+   * Reverts the exact last decision deterministically
    */
-  public advanceBurstFrame(direction: 1 | -1): void {
-    const burstPhotos = this.getBurstPhotos();
-    if (burstPhotos.length === 0) return;
+  public undo(): void {
+    if (this.session.history.length === 0) return;
 
-    const currentIndex = burstPhotos.findIndex((p) => p.id === this.state.candidateBId);
-    let nextIndex = currentIndex + direction;
+    const lastDecision = this.session.history.pop()!;
+    
+    // Restore exact state
+    this.session.isActive = true;
+    this.session.currentPair = [lastDecision.leftId, lastDecision.rightId];
+    this.session.pendingPairs = lastDecision.previousPendingPairs.map(pair => [...pair] as [string, string]);
+    this.session.winners = [...lastDecision.previousWinners];
+    this.session.eliminatedIds = [...lastDecision.previousEliminatedIds];
 
-    if (nextIndex < 0) nextIndex = burstPhotos.length - 1;
-    if (nextIndex >= burstPhotos.length) nextIndex = 0;
+    this.notify();
+  }
 
-    this.state.candidateBId = burstPhotos[nextIndex].id;
+  /**
+   * Cancels the session and returns to gallery
+   */
+  public cancelSession(): void {
+    this.session = {
+      isActive: false,
+      roundNumber: 1,
+      initialIds: [],
+      pendingPairs: [],
+      currentPair: null,
+      winners: [],
+      eliminatedIds: [],
+      history: []
+    };
+    
     this.notify();
   }
 

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#ffdea9","on-secondary-fixed":"#271900","on-primary":"#002e68","secondary-fixed-dim":"#ffba27","outline":"#8b90a0","surface":"#111319","surface-container-low":"#191c21","surface-bright":"#36393f","primary":"#adc7ff","on-background":"#e1e2ea","error":"#ffb4ab","secondary-container":"#fbb400","on-tertiary-container":"#002f35","primary-container":"#4a8eff","surface-container-high":"#272a30","on-secondary-container":"#694900","surface-container":"#1d2025","surface-container-highest":"#32353b","on-error":"#690005","on-tertiary-fixed":"#001f24","on-surface":"#e1e2ea","background":"#111319","on-tertiary":"#00363d","primary-fixed":"#d8e2ff","surface-dim":"#111319","tertiary-fixed-dim":"#00daf3","surface-container-lowest":"#0b0e13","inverse-primary":"#005bc0","tertiary-fixed":"#9cf0ff","on-error-container":"#ffdad6","primary-fixed-dim":"#adc7ff","tertiary-container":"#009fb2","outline-variant":"#414754","on-primary-fixed":"#001a41","tertiary":"#00daf3","on-primary-container":"#00285b","on-secondary":"#422c00","inverse-on-surface":"#2e3036","on-tertiary-fixed-variant":"#004f58","inverse-surface":"#e1e2ea","on-secondary-fixed-variant":"#5e4100","surface-variant":"#32353b","on-primary-fixed-variant":"#004493","surface-tint":"#adc7ff","error-container":"#93000a","on-surface-variant":"#c1c6d7","secondary":"#ffd795"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin":"1rem","space-sm":"0.5rem","space-md":"1rem","space-xl":"2.5rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","margin-desktop":"2rem","space-xs":"0.25rem","gutter":"0.75rem"},"fontFamily":{"body-sm":["Manrope"],"label-md":["Geist"],"headline-md":["Geist"],"headline-lg":["Geist"],"headline-xl-mobile":["Geist"],"body-md":["Manrope"],"metadata-mono":["Geist"],"body-lg":["Manrope"],"label-sm":["Geist"],"headline-xl":["Geist"]},"fontSize":{"body-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"400"}],"label-md":["13px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"500"}],"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-xl-mobile":["30px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"400"}],"metadata-mono":["11px",{"lineHeight":"14px","letterSpacing":"0.02em","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"400"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"500"}],"headline-xl":["40px",{"lineHeight":"48px","letterSpacing":"-0.03em","fontWeight":"600"}]}}}};</script></head><body class="bg-background text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-primary text-[24px]">filter_vintage</span><h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Photo Library</h1><div class="flex items-center gap-space-xs ml-space-xs px-space-sm py-space-xs rounded-full bg-surface-container-high"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span><span class="font-metadata-mono text-metadata-mono text-on-surface-variant font-medium">RAW</span></div></div><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface-container-lowest"><div class="flex flex-col w-full pb-32">
+<!-- Session Header & Telemetry Overview -->
+<section class="px-margin pt-space-sm pb-space-md flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="min-w-0 pr-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[16px]">folder_special</span>
+<span class="font-metadata-mono text-metadata-mono text-tertiary font-semibold tracking-wider uppercase">Sesión de campo</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight truncate mt-space-xs">
+          Costa Brava Sunset
+        </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-space-xs mt-0.5">
+<span>48 capturas RAW</span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span>Sony A7R V · 35mm GM</span>
+</p>
+</div>
+<!-- Quick Session Stats Capsule -->
+<div class="bg-surface-container-high px-space-md py-space-xs rounded-lg flex flex-col items-end shadow-sm shrink-0">
+<div class="flex items-center gap-1">
+<span class="font-headline-md text-headline-md text-primary font-bold" id="selection-header-count">18</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ 48</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Elegidas</span>
+</div>
+</div>
+<!-- Triage Filter Rail (Touch-first pill bar) -->
+<div class="flex items-center gap-space-xs overflow-x-auto no-scrollbar py-space-xs -mx-margin px-margin">
+<button class="filter-chip active flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-primary text-on-primary font-label-md text-label-md transition-transform active:scale-95 shadow-sm shrink-0">
+<span>Todas</span>
+<span class="px-1.5 py-0.2 rounded-full bg-on-primary/20 text-on-primary font-metadata-mono text-metadata-mono">48</span>
+</button>
+<button class="filter-chip flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-transform active:scale-95 shrink-0">
+<span>Retratos</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface-variant font-metadata-mono text-metadata-mono">22</span>
+</button>
+<button class="filter-chip flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-transform active:scale-95 shrink-0">
+<span>Paisajes</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface-variant font-metadata-mono text-metadata-mono">19</span>
+</button>
+<button class="filter-chip flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-transform active:scale-95 shrink-0">
+<span>Sin clasificar</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface-variant font-metadata-mono text-metadata-mono">7</span>
+</button>
+</div>
+</section>
+<!-- Photo Contact Sheet (2-Column Grid) -->
+<section class="px-margin">
+<div class="grid grid-cols-2 gap-gutter" id="gallery-grid">
+<!-- Photo Card 1: Selected Portrait -->
+<article class="photo-card group relative bg-surface-container rounded-DEFAULT overflow-hidden cursor-pointer shadow-md select-none" data-selected="true">
+<div class="aspect-[4/5] w-full relative overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Editorial cinematic golden hour close-up portrait of a woman looking away on the Costa Brava cliffs. Warm amber sunlight hitting her face, gentle coastal wind blowing wisps of brown hair, moody twilight atmosphere, shallow depth of field, high dynamic range with deep obsidian shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE3bULyetqHBZVgy_h7CIWpvcsh52m32g6PqB4XRNUFXVZNtxeQF37IDYCerrwKvtZHvJoR-macAbOvOw21ALI5QWIR4NDTIoEcYxhyXVVI5s8BfoiFuLEjI3myS5Jx1pvAXL8YGhrE9o8HNX1WUgDS028GPHcpEfjBX-r_C7b9mzFPrpKOI4r1R6VIqtXhigC5E4GHLvYsCHkbweGCkvhnm0_DBEOBAS6Vnn6dPTqAQ9fjcCVljRU"/>
+<!-- Gradient Scrim for Contrast -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent pointer-events-none"></div>
+<!-- Selection Indicator Badge -->
+<div class="select-badge absolute top-2 right-2 w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg transition-transform duration-200">
+<span class="material-symbols-outlined text-[18px] font-bold">check</span>
+</div>
+<!-- Starred Finalist Accent -->
+<div class="absolute top-2 left-2 px-1.5 py-0.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center gap-0.5 text-secondary">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-metadata-mono text-metadata-mono">5.0</span>
+</div>
+<!-- EXIF Capsule -->
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface-variant">
+<span class="font-metadata-mono text-metadata-mono bg-surface-container-lowest/70 backdrop-blur-sm px-1.5 py-0.5 rounded text-on-surface">f/1.4 · 1/800s</span>
+<span class="font-metadata-mono text-metadata-mono uppercase">RAW</span>
+</div>
+</div>
+<!-- Active Selection Border Glow Overlay -->
+<div class="selected-overlay absolute inset-0 rounded-DEFAULT pointer-events-none shadow-[inset_0_0_0_2px_#4a8eff] transition-opacity duration-200"></div>
+</article>
+<!-- Photo Card 2: Selected Coastal Landscape -->
+<article class="photo-card group relative bg-surface-container rounded-DEFAULT overflow-hidden cursor-pointer shadow-md select-none" data-selected="true">
+<div class="aspect-[4/5] w-full relative overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Dramatic Mediterranean ocean swell crashing against sharp volcanic jagged rocks in Costa Brava under dusk lighting. Electric turquoise sea foam contrasting with dark obsidian rocks and pinkish-purple horizon sky, fine mist spray captured sharply." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp-w-wAoiQg1D3GDvnngJvqxmMDQxN2mMqrgpXze739jwXJ8kZ2Mfl-8c4L-o-aoGfkXdaOm-wqK2NULLTv64OP3kYTIukKNMHon7q-OE7K2AvmLQAPKbE1vxfLi5YjoI2nV1PmmpCl5tQzfox16CB7XoMbsC7mRJfBjjDpwd2SVTlxf46Rek7PcW_13NwvqoJLVXVOG6T71GxoINrxr859ncckFoyCKJh74s2OFCbM-BPVWDZtWNV"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent pointer-events-none"></div>
+<div class="select-badge absolute top-2 right-2 w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg transition-transform duration-200">
+<span class="material-symbols-outlined text-[18px] font-bold">check</span>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface-variant">
+<span class="font-metadata-mono text-metadata-mono bg-surface-container-lowest/70 backdrop-blur-sm px-1.5 py-0.5 rounded text-on-surface">f/8.0 · 1/40s</span>
+<span class="font-metadata-mono text-metadata-mono uppercase">RAW</span>
+</div>
+</div>
+<div class="selected-overlay absolute inset-0 rounded-DEFAULT pointer-events-none shadow-[inset_0_0_0_2px_#4a8eff] transition-opacity duration-200"></div>
+</article>
+<!-- Photo Card 3: Unselected Mountain Vista -->
+<article class="photo-card group relative bg-surface-container rounded-DEFAULT overflow-hidden cursor-pointer shadow-md select-none" data-selected="false">
+<div class="aspect-[4/5] w-full relative overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-85" data-alt="Distant silhouette of pine-covered Pyrenean mountain foothills touching the sea coast. Soft atmospheric evening haze, layered ridges fading into slate blue and misty shadows, fine technical detail and clean horizon." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVoNlEcubGjHwoOasCkhk0uxbv9NuIrMpxvGABVrrdm_AISTwA-znP6EjA1cfbG0IbWDY4nDapROQfM3IWvHTKr7dssvdudfoa1b3-rzem-qpF1UaLAD65qlZeB5Czet7Z7wJqQ9i7dnsSFGMCQaMBGTT4nEd1FovTcaG8pbKJDObjVdjsboHbGlgYW8-xOqS6lISjinVe3VFIi6RWjj31ZNVb0eSiIcU_dAsQchpT4QVcqsV1QbAi"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent pointer-events-none"></div>
+<!-- Unselected Checkbox Ring -->
+<div class="select-badge absolute top-2 right-2 w-7 h-7 rounded-full bg-surface-container-lowest/60 backdrop-blur-md text-transparent flex items-center justify-center shadow-md border-0 transition-transform duration-200">
+<span class="material-symbols-outlined text-[18px] opacity-0">check</span>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface-variant">
+<span class="font-metadata-mono text-metadata-mono bg-surface-container-lowest/70 backdrop-blur-sm px-1.5 py-0.5 rounded text-on-surface">f/4.0 · 1/320s</span>
+<span class="font-metadata-mono text-metadata-mono uppercase">RAW</span>
+</div>
+</div>
+<div class="selected-overlay absolute inset-0 rounded-DEFAULT pointer-events-none opacity-0 shadow-[inset_0_0_0_2px_#4a8eff] transition-opacity duration-200"></div>
+</article>
+<!-- Photo Card 4: Selected Candid Movement -->
+<article class="photo-card group relative bg-surface-container rounded-DEFAULT overflow-hidden cursor-pointer shadow-md select-none" data-selected="true">
+<div class="aspect-[4/5] w-full relative overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Artistic motion blur capture of a figure in a flowing linen shirt walking along a stone coastal pathway. Warm amber lens flare kissing the corner of the frame, high contrast shadows against sun-bleached terracotta stone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7y36b5saHteOrS8lFOj_cPthRY4-YxDnNiMSHYXCu9epk_WHfBNwHKLhYzoTzBraRIdB1ukJh7Wde1RI369zoK19ANofG7ZqnE6Cz4A9Mg5XYPg0gyoPT-zEYB3JA2pQ-JBCWs9xS5VY611Wg8tANRFb-1f8zgp5WNmHDco-y2kTywuJJDPkLiw-fqET4uUxUc5BsjiwttZBbV-GFRjNZTBY9MdXrYtwyTPf8x_tB1Moe5JqGuVwe"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent pointer-events-none"></div>
+<div class="select-badge absolute top-2 right-2 w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg transition-transform duration-200">
+<span class="material-symbols-outlined text-[18px] font-bold">check</span>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface-variant">
+<span class="font-metadata-mono text-metadata-mono bg-surface-container-lowest/70 backdrop-blur-sm px-1.5 py-0.5 rounded text-on-surface">f/2.0 · 1/125s</span>
+<span class="font-metadata-mono text-metadata-mono uppercase">RAW</span>
+</div>
+</div>
+<div class="selected-overlay absolute inset-0 rounded-DEFAULT pointer-events-none shadow-[inset_0_0_0_2px_#4a8eff] transition-opacity duration-200"></div>
+</article>
+<!-- Photo Card 5: Selected Coastal Architecture -->
+<article class="photo-card group relative bg-surface-container rounded-DEFAULT overflow-hidden cursor-pointer shadow-md select-none" data-selected="true">
+<div class="aspect-[4/5] w-full relative overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Minimalist white stucco seaside village archway in Cadaqués framing the deep cyan Mediterranean sea. Crisp graphic architectural shadows, golden evening light reflection, pure Mediterranean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzZYXIezcAD4UdS61BYYki1Ymyk2rN3YRMTH2iDbuotNF08VTQ6tovNte15SB3XQE-8m0w6hkZInzFeHi2diBA5EcY_C8E_7ENhaMUM0tgX8Stgsei7pGqETzZDw3ifMDB2kHlJc5k0wdx2cdIaKPxoeV5U4hNaswjxNKNoe5gxcMTQFud1PEzYNy38z0FR0OZtIC8i7PPg71mKdkKJ6rjS8Yzj8ijw6y3_Ip_JshrEor_mkMA7YO5"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent pointer-events-none"></div>
+<div class="select-badge absolute top-2 right-2 w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg transition-transform duration-200">
+<span class="material-symbols-outlined text-[18px] font-bold">check</span>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface-variant">
+<span class="font-metadata-mono text-metadata-mono bg-surface-container-lowest/70 backdrop-blur-sm px-1.5 py-0.5 rounded text-on-surface">f/5.6 · 1/640s</span>
+<span class="font-metadata-mono text-metadata-mono uppercase">RAW</span>
+</div>
+</div>
+<div class="selected-overlay absolute inset-0 rounded-DEFAULT pointer-events-none shadow-[inset_0_0_0_2px_#4a8eff] transition-opacity duration-200"></div>
+</article>
+<!-- Photo Card 6: Unselected Sunset Glow -->
+<article class="photo-card group relative bg-surface-container rounded-DEFAULT overflow-hidden cursor-pointer shadow-md select-none" data-selected="false">
+<div class="aspect-[4/5] w-full relative overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-85" data-alt="Wide panoramic vista of the Costa Brava coastline at dusk with the sun dipping below distant peaks. Radiant orange and gradient violet sky, calm reflective ocean water, technical exposure capturing full tonal gradation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhu46gbSyqWMUHpghdECOIkuUK-aIMUIaC4u84Qoaj9p5E0qll9Nb-B7FwoHit0lrRyjA-gnKRBJjVdAfs4nAvmK0CLhRdFv9hHIChbadvk0Skvo8ibcgy19o0BTShJxysw22ajm0VTB9uvKmwM_BONtjKVXBQMgtULfiUXc6Jl29khu_u6GN3E99mO0hYxAvnE1GGrFI_YxF_aEaa5klPHNg3ptV5yqK6YFXEnM1K-lCZHG-xGgVS"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/20 to-transparent pointer-events-none"></div>
+<div class="select-badge absolute top-2 right-2 w-7 h-7 rounded-full bg-surface-container-lowest/60 backdrop-blur-md text-transparent flex items-center justify-center shadow-md transition-transform duration-200">
+<span class="material-symbols-outlined text-[18px] opacity-0">check</span>
+</div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between text-on-surface-variant">
+<span class="font-metadata-mono text-metadata-mono bg-surface-container-lowest/70 backdrop-blur-sm px-1.5 py-0.5 rounded text-on-surface">f/11 · 1/15s</span>
+<span class="font-metadata-mono text-metadata-mono uppercase">RAW</span>
+</div>
+</div>
+<div class="selected-overlay absolute inset-0 rounded-DEFAULT pointer-events-none opacity-0 shadow-[inset_0_0_0_2px_#4a8eff] transition-opacity duration-200"></div>
+</article>
+</div>
+</section>
+<!-- Quick Selection Tools Strip -->
+<section class="px-margin mt-space-md flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded-full bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-sm text-label-sm transition-colors flex items-center gap-1" id="btn-select-all">
+<span class="material-symbols-outlined text-[15px]">done_all</span>
+<span>Seleccionar todo</span>
+</button>
+<button class="px-space-sm py-1 rounded-full bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-sm text-label-sm transition-colors" id="btn-invert">
+        Invertir
+      </button>
+</div>
+<span class="font-metadata-mono text-metadata-mono">30 descartadas</span>
+</section>
+<!-- Sticky Bottom Floating Action Dock -->
+<aside class="fixed bottom-20 left-0 right-0 z-40 px-margin pointer-events-none">
+<div class="max-w-md mx-auto pointer-events-auto">
+<div class="bg-surface-container-highest/90 backdrop-blur-xl p-space-xs rounded-xl shadow-2xl flex items-center justify-between gap-space-sm">
+<!-- Left Side: Selection Metric & Star Tool -->
+<div class="flex items-center gap-space-sm pl-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold" id="dock-counter-bold">18 fotos</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">listas</span>
+</div>
+<span class="font-metadata-mono text-metadata-mono text-on-surface-variant" id="dock-secondary-label">18 de 48 seleccionadas</span>
+</div>
+</div>
+<!-- Right Side: High-Contrast Pill CTA -->
+<button class="flex items-center gap-space-xs px-space-lg py-space-sm rounded-full bg-primary-container text-on-primary-container hover:brightness-110 active:scale-95 transition-all shadow-md shrink-0" id="btn-continue">
+<span class="font-label-md text-label-md font-bold">Continuar</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+<script>
+  (function() {
+    let count = 18;
+    const total = 48;
+    const headerCount = document.getElementById('selection-header-count');
+    const dockBold = document.getElementById('dock-counter-bold');
+    const dockSecondary = document.getElementById('dock-secondary-label');
+    const cards = document.querySelectorAll('.photo-card');
+
+    function updateCounters() {
+      if (headerCount) headerCount.textContent = count;
+      if (dockBold) dockBold.textContent = `${count} fotos`;
+      if (dockSecondary) dockSecondary.textContent = `${count} de ${total} seleccionadas`;
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        const isSelected = card.getAttribute('data-selected') === 'true';
+        const nextState = !isSelected;
+        card.setAttribute('data-selected', nextState ? 'true' : 'false');
+
+        const badge = card.querySelector('.select-badge');
+        const badgeIcon = badge.querySelector('.material-symbols-outlined');
+        const overlay = card.querySelector('.selected-overlay');
+        const img = card.querySelector('img');
+
+        if (nextState) {
+          count++;
+          badge.className = 'select-badge absolute top-2 right-2 w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg transition-transform duration-200 scale-110';
+          setTimeout(() => badge.classList.remove('scale-110'), 150);
+          badgeIcon.classList.remove('opacity-0');
+          overlay.classList.remove('opacity-0');
+          img.classList.remove('opacity-85');
+        } else {
+          count = Math.max(0, count - 1);
+          badge.className = 'select-badge absolute top-2 right-2 w-7 h-7 rounded-full bg-surface-container-lowest/60 backdrop-blur-md text-transparent flex items-center justify-center shadow-md transition-transform duration-200';
+          badgeIcon.classList.add('opacity-0');
+          overlay.classList.add('opacity-0');
+          img.classList.add('opacity-85');
+        }
+
+        updateCounters();
+      });
+    });
+
+    const selectAllBtn = document.getElementById('btn-select-all');
+    if (selectAllBtn) {
+      selectAllBtn.addEventListener('click', () => {
+        cards.forEach(card => {
+          if (card.getAttribute('data-selected') !== 'true') {
+            card.click();
+          }
+        });
+      });
+    }
+
+    const invertBtn = document.getElementById('btn-invert');
+    if (invertBtn) {
+      invertBtn.addEventListener('click', () => {
+        cards.forEach(card => card.click());
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]" data-active-classes="text-primary"><div class="flex justify-around items-center h-16 px-margin"><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="curation-deck" href="#"><span class="material-symbols-outlined text-[24px]">view_carousel</span><span class="font-label-sm text-label-sm mt-space-xs">Triage</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] transition-colors text-primary" data-path="photo-library" href="#"><span class="material-symbols-outlined text-[24px]">grid_view</span><span class="font-label-sm text-label-sm mt-space-xs">Library</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="shortlist" href="#"><span class="material-symbols-outlined text-[24px]">star</span><span class="font-label-sm text-label-sm mt-space-xs">Shortlist</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="batch-export" href="#"><span class="material-symbols-outlined text-[24px]">ios_share</span><span class="font-label-sm text-label-sm mt-space-xs">Export</span></a></div></nav></body></html>
